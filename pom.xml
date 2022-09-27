@@ -16,10 +16,77 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>scifioMavenTest</name>
+  <description>Testing if I can get scifio dependencies to build.</description>
   <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <url>http://emagnuson.com/</url>
+  <inceptionYear>2022</inceptionYear>
+  <organization>
+    <name>SCIFIO</name>
+    <url>http://emagnuson.com/</url>
+  </organization>  
+  <licenses>
+    <license>
+      <name>Simplified BSD License</name>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>ctrueden</id>
+      <name>Curtis Rueden</name>
+      <url>https://imagej.net/User:Rueden</url>
+      <roles>
+        <role>founder</role>
+        <role>lead</role>
+        <role>developer</role>
+        <role>debugger</role>
+        <role>reviewer</role>
+        <role>support</role>
+        <role>maintainer</role>
+      </roles>
+    </developer>
+  </developers>
+
+
+  <contributors>
+    <contributor>
+      <name>Mark Hiner</name>
+      <url>https://imagej.net/User:Hinerm</url>
+      <roles><role>founder</role></roles>
+      <properties><id>hinerm</id></properties>
+    </contributor>
+  </contributors>
+
+  <mailingLists>
+    <mailingList>
+    <name>Image.sc Forum</name>
+    <archive>https://forum.image.sc/tag/scifio</archive>
+    </mailingList>
+  </mailingLists>
+
+  <scm>
+    <connection>scm:git:https://github.com/ecmagnuson/scifioMavenTest</connection>
+    <developerConnection>scm:git:git@github.com:ecmagnuson/scifioMavenTest</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/ecmagnuson/scifioMavenTest</url>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/ecmagnuson/scifioMavenTest/issues</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/ecmagnuson/scifioMavenTest/actions</url>
+  </ciManagement>
+
+
 
   <properties>
+    <license.licenseName>bsd_2</license.licenseName>
+    <license.copyrightOwners>SCIFIO developers.</license.copyrightOwners>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
@@ -41,49 +108,4 @@
     </dependency>
   </dependencies>
 
-  <build>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
-      <plugins>
-        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
-        <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.8.0</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.22.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>2.5.2</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>2.8.2</version>
-        </plugin>
-        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>
