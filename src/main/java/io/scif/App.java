@@ -2,10 +2,10 @@ package io.scif;
 
 import org.scijava.service.AbstractService;
 
-public class App extends AbstractService{
+public abstract class App extends AbstractService{
 
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        System.out.println( "It's taken a second for me to wrap my head around why an abstract class can have a main method, but I think I understand now." );
     }
 
 }
