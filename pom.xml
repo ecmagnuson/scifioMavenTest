@@ -26,11 +26,18 @@
   </properties>
 
   <dependencies>
+    <!-- Test dependency -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <!--  <version>4.11</version> version not needed. Parent provides -->
       <scope>test</scope>
+    </dependency>
+    
+    <!-- SciJava dependencies -->
+    <dependency>
+      <groupId>org.scijava</groupId>
+      <artifactId>scijava-common</artifactId>
     </dependency>
   </dependencies>
 
