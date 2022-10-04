@@ -23,4 +23,10 @@ public class AppTest {
 		assertEquals(App.square(5), 25);
 	}
 	
+	@Test
+	public void getClassName() {
+		App app = new App();
+		assertEquals(app.getClass().toString(), "class io.scif.App");
+	}
+	
 }
