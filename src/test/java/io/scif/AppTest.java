@@ -1,32 +1,46 @@
 package io.scif;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.scijava.Context;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
-	/**
-	 * Rigorous Test :-)
-	 */
-	@Test
-	public void shouldAnswerWithTrue() {
-		assertTrue(true);
-	}
-	
-	@Test
-	//Random test
-	public void testSquare() {
-		assertEquals(App.square(5), 25);
-	}
-	
-	@Test
-	public void getClassName() {
-		App app = new App();
-		assertEquals(app.getClass().toString(), "class io.scif.App");
-	}
-	
+
+    private Context ctx;
+    private App appWithContext;
+    private App app;
+
+    @Before
+    public void setUp() {
+	ctx = new Context(App.class);
+	appWithContext = ctx.service(App.class);
+	// vs without context
+	app = new App();
+    }
+
+    @Test
+    public void getClassName() {
+	// class name is the same
+	assertEquals(app.getClass().toString(), appWithContext.getClass().toString());
+    }
+    
+    @Test
+    public void testAppInfoNull() {
+	//Info is should be null because we didn't give a context
+	assertNull(app.getInfo());
+    }
+    
+    @Test
+    public void testSameInfo() {
+	//should not be null because we did give it a context
+	assertNotNull(appWithContext.getInfo());
+    }
+
 }
