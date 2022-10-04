@@ -11,6 +11,8 @@ public class App extends AbstractService {
 	return num * num;
     }
     
-    
+    public String toString() {
+	return super.toString();
+    }
 
 }

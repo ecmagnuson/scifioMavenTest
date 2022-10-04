@@ -21,8 +21,7 @@ public class AppTest {
     public void setUp() {
 	ctx = new Context(App.class);
 	appWithContext = ctx.service(App.class);
-	// vs without context
-	app = new App();
+	app = new App(); // vs without context
     }
 
     @Test
@@ -30,17 +29,35 @@ public class AppTest {
 	// class name is the same
 	assertEquals(app.getClass().toString(), appWithContext.getClass().toString());
     }
-    
+
     @Test
     public void testAppInfoNull() {
-	//Info is should be null because we didn't give a context
+	// Info is should be null because we didn't give a context
 	assertNull(app.getInfo());
+    }
+
+    @Test
+    public void testSameInfo() {
+	// should not be null because we did give it a context
+	assertNotNull(appWithContext.getInfo());
     }
     
     @Test
-    public void testSameInfo() {
-	//should not be null because we did give it a context
-	assertNotNull(appWithContext.getInfo());
+    public void testSquare() {
+	assertEquals(appWithContext.square(5), app.square(5));
     }
+    
+    @Test
+    public void testToString() {
+	//same name and priority
+	assertEquals(appWithContext.toString(), app.toString());
+    }
+    
+    //context is a collection of plugins
+    //service is a type of plugin
+    //module look into scijava common particular type of plugin with io.
+    //service acces to methods
+    
+    
 
 }
