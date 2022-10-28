@@ -7,6 +7,7 @@ import static org.junit.Assert.assertNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.scijava.Context;
+import org.scijava.display.Display;
 
 /**
  * Unit test for simple App.
@@ -20,7 +21,17 @@ public class AppTest {
     @Before
     public void setUp() {
 	ctx = new Context(App.class);
-	appWithContext = ctx.service(App.class);
+	
+	//creating one context
+	//signleton classes 1 instance of it 
+	ctx.service(App.class);
+	//plugins vs services
+	//ctx.getPluginIndex().get(Display.class);
+	//RichPlugin superclass of many plugins
+	
+	appWithContext = ctx.service(App.class); //everything filled out here
+	//asking cxt for service of a type. same instance of that service
+	//services are singletons in a particular context
 	app = new App(); // vs without context
     }
 
@@ -56,8 +67,8 @@ public class AppTest {
     //context is a collection of plugins
     //service is a type of plugin
     //module look into scijava common particular type of plugin with io.
-    //service acces to methods
-    
-    
+    //module has io
+    //service access to methods. singleton utility classes
+   
 
 }
