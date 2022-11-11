@@ -15,53 +15,55 @@ import org.scijava.display.Display;
 public class AppTest {
 
     private Context ctx;
-    private App appWithContext;
-    private App app;
+    //vacuum bag sucks in plugins and gives services from the plugins
+    private DemoService serviceWithContext;
+    private DemoService serviceNoContext;
 
     @Before
     public void setUp() {
-	ctx = new Context(App.class);
+	ctx = new Context(DemoService.class);
+	
 	
 	//creating one context
 	//signleton classes 1 instance of it 
-	ctx.service(App.class);
+	ctx.service(DemoService.class);
 	//plugins vs services
 	//ctx.getPluginIndex().get(Display.class);
 	//RichPlugin superclass of many plugins
 	
-	appWithContext = ctx.service(App.class); //everything filled out here
+	serviceWithContext = ctx.service(DemoService.class); //everything filled out here
 	//asking cxt for service of a type. same instance of that service
 	//services are singletons in a particular context
-	app = new App(); // vs without context
+	serviceNoContext = new DemoService(); // vs without context
     }
 
     @Test
     public void getClassName() {
 	// class name is the same
-	assertEquals(app.getClass().toString(), appWithContext.getClass().toString());
+	assertEquals(serviceNoContext.getClass().toString(), serviceWithContext.getClass().toString());
     }
 
     @Test
     public void testAppInfoNull() {
 	// Info is should be null because we didn't give a context
-	assertNull(app.getInfo());
+	assertNull(serviceNoContext.getInfo());
     }
 
     @Test
     public void testSameInfo() {
 	// should not be null because we did give it a context
-	assertNotNull(appWithContext.getInfo());
+	assertNotNull(serviceWithContext.getInfo());
     }
     
     @Test
     public void testSquare() {
-	assertEquals(appWithContext.square(5), app.square(5));
+	assertEquals(serviceWithContext.square(5), serviceNoContext.square(5));
     }
     
     @Test
     public void testToString() {
 	//same name and priority
-	assertEquals(appWithContext.toString(), app.toString());
+	assertEquals(serviceWithContext.toString(), serviceNoContext.toString());
     }
     
     //context is a collection of plugins
