@@ -1,10 +1,12 @@
 package io.scif;
 
-import org.scijava.Context;
+import java.util.List;
+
 import org.scijava.display.AbstractDisplay;
 import org.scijava.display.Display;
-import org.scijava.plugin.DefaultPluginService;
+import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
+import org.scijava.plugin.PluginService;
 import org.scijava.service.AbstractService;
 import org.scijava.service.Service;
 //Context root
@@ -13,9 +15,12 @@ import org.scijava.service.Service;
 //making a plugin here. it exists within a Context
 public class DemoService extends AbstractService {
 
-	public int square(int num) {
-		return num * num;
-	}
+	//interface is used at type not the concrete class.
+	//dont know what the concrete class will be
+	//so PluginService not DefaultPluginService
+	@Parameter
+	private PluginService pluginService;
+	
 
 	// TODO create a method that gets all plugins of a particular Class (look at
 	// type
@@ -27,6 +32,9 @@ public class DemoService extends AbstractService {
 	public String toString() {
 		return super.toString();
 	}
+	
+	
+	
 
 	// this.getContext().getPluginIndex().getPlugins(null);
 	
@@ -36,13 +44,12 @@ public class DemoService extends AbstractService {
 	 * 
 	 */
 	
-	public DisplayPlugin createDisplayInstance() {
+	public List<DisplayPlugin> getDisplayPlugins() {
 		
 		//get plugin service from Context
-		Context ctx;
-		ctx = getContext();
+
 		/*
-		 * look at other Plugin. See how they declare dependancies on services.
+		 * look at other Plugin. See how they declare dependancies on Service.
 		 * 
 		 * And then use this method of dependency declaration to add a dependancy on 
 		 * PluginService and replace the following code. to replace next 2 lines 
@@ -57,14 +64,14 @@ public class DemoService extends AbstractService {
 			 * Add a dependanc on PluginService then use PluginSerivce to create
 			 * the instance of the DisplayPlugin
 		 */
+		//pluginService at runtime is a concrete class provided by the Context because of @parameter
+		List<DisplayPlugin> dp = pluginService.createInstancesOfType(DisplayPlugin.class);
 		
-		DefaultPluginService d = new DefaultPluginService();
-		
-		DefaultPluginService dps = d.createInstance(null);
 		//dps.createInstance(new App);
 		//dps.createInstance(this);
-		return dps;
+		return dp;
 	}
+
 }
 
 /**
