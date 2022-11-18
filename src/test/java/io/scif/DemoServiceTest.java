@@ -13,7 +13,7 @@ import org.scijava.display.Display;
 /**
  * Unit test for simple App.
  */
-public class AppTest {
+public class DemoServiceTest {
 
     private Context ctx;
     //vacuum bag sucks in plugins and gives services from the plugins
