@@ -25,6 +25,19 @@ public class DemoServiceTest {
 
 //no param should find everything 
 
+	//1. do this with no parameters
+	//debug probably
+	//
+	// 2. if it doesnt work do mvn clean install from cmd line 
+	// 
+	//3. DisplayPlugin didn't work because not service 
+	
+	//email Kevin with end of semester and next semester
+	//
+	
+	//no parameters - context looks for everything.
+	// context takes Services
+	//open a call togethor turn video off
 	ctx = new Context(DemoService.class, DisplayPlugin.class); // debug and look TODO
 	// ctx = new Context(DemoService.class, DisplayPlugin.class); //just getting
 	// DemoServices here
@@ -89,12 +102,16 @@ public class DemoServiceTest {
     /**
      * testGetDisplayPlugins()
      *
-     * // null 1. Understand why testGetDisplayPlugins threw NPE. It was correct to
+     * // null 
+     * 1. Understand why testGetDisplayPlugins threw NPE. It was correct to
      * do that, understand why though.
      * 
-     * testGetDisplayPlugins2() 2. Check if there is anything in the
-     * serviceWithContext.getDisplayPlugins() -- debugger. 2a If the list is empty
-     * change how the context is created by adding your DisplayPlugin.class 2b. if
+     * testGetDisplayPlugins2() 
+     * 2. Check if there is anything in the
+     * serviceWithContext.getDisplayPlugins() -- debugger. 
+     * 2a If the list is empty
+     * change how the context is created by adding your DisplayPlugin.class 
+     * 2b. if
      * the list is not empty or if changes are made and test still fails then Mark
      * is wrong.
      * 
