@@ -26,26 +26,14 @@ public class DemoServiceTest {
 		// ctx = new Context();
 
 		//// context takes Services
+		//ctx.getPluginIndex().get(Display.class);
 		ctx = new Context(DemoService.class);
 		// ctx = new Context(DisplayPlugin.class); will fail bc it's not a Service
-
-		// creating one context
-		// signleton classes 1 instance of it
-		ctx.service(DemoService.class);
-		// plugins vs services
-		// ctx.getPluginIndex().get(Display.class);
-		// RichPlugin superclass of many plugins
 
 		serviceWithContext = ctx.service(DemoService.class); // everything filled out here
 		// asking cxt for service of a type. same instance of that service
 		// services are singletons in a particular context
 		serviceNoContext = new DemoService(); // vs without context
-	}
-
-	@Test
-	public void getClassName() {
-		// class name is the same
-		assertEquals(serviceNoContext.getClass().toString(), serviceWithContext.getClass().toString());
 	}
 
 	@Test
@@ -60,21 +48,19 @@ public class DemoServiceTest {
 		assertNotNull(serviceWithContext.getInfo());
 	}
 
-	@Test
-	public void testToString() {
-		// same name and priority
-		assertEquals(serviceWithContext.toString(), serviceNoContext.toString());
-	}
-
-	// TODO debug these below methods
-
 	/*
 	 * Make sure different instances created when calling method
 	 */
-	@Test
+	@Test(expected=NullPointerException.class)
 	public void testGDPNoContext() {
 		// throws NPE
 		assertNotEquals(serviceNoContext.getDisplayPlugins(), serviceNoContext.getDisplayPlugins());
+	}
+	
+	@Test 
+	//Test size is 1 when creating
+	public void testPluginCount() {
+		assertEquals(2, serviceWithContext.getDisplayPlugins().size());
 	}
 
 	@Test

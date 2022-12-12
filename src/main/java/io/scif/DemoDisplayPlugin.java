@@ -15,11 +15,14 @@ import org.scijava.plugin.Plugin;
  */
 @Plugin(type = Display.class)
 //making a plugin here. it exists within a Context not a Service
-class DisplayPlugin extends AbstractDisplay<Integer> {
+class DemoDisplayPlugin extends AbstractDisplay<Integer> {
 
-  public DisplayPlugin(Class<Integer> type) {
-	super(type);
-  }
+	//when making a Plugin need 0 param constructor so framework can
+	//create Plugin instance
+	
+	public DemoDisplayPlugin() {
+		super(Integer.class);
+	}
 
   // Dont extend AbstractService because that is a Service
   // The type of object the display can visualize.
