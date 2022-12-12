@@ -7,131 +7,111 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.scijava.Context;
-import org.scijava.display.Display;
 
-/**
- * Unit test for simple App.
- */
+import org.scijava.Context;
+
+
 public class DemoServiceTest {
 
-    private Context ctx;
-    // vacuum bag sucks in plugins and gives services from the plugins
-    private DemoService serviceWithContext;
-    private DemoService serviceNoContext;
+	// A Context finds Plugins and gets Services from the Plugins
+	private Context ctx;
 
-    @Before
-    public void setUp() {
+	private DemoService serviceWithContext; // Instance of DemoService with proper Context
+	private DemoService serviceNoContext; // Instance of DemoService without proper Context
 
-//no param should find everything 
+	@Before
+	public void setUp() {
 
-	//1. do this with no parameters
-	//debug probably
-	//
-	// 2. if it doesnt work do mvn clean install from cmd line 
-	// 
-	//3. DisplayPlugin didn't work because not service 
-	
-	//email Kevin with end of semester and next semester
-	//
-	
-	//no parameters - context looks for everything.
-	// context takes Services
-	//open a call togethor turn video off
-	ctx = new Context(DemoService.class, DisplayPlugin.class); // debug and look TODO
-	// ctx = new Context(DemoService.class, DisplayPlugin.class); //just getting
-	// DemoServices here
-	// ctx = new Context();
+		// no param context looks for everything.
+		// ctx = new Context();
 
-	// creating one context
-	// signleton classes 1 instance of it
-	ctx.service(DemoService.class);
-	// plugins vs services
-	// ctx.getPluginIndex().get(Display.class);
-	// RichPlugin superclass of many plugins
+		//// context takes Services
+		ctx = new Context(DemoService.class);
+		// ctx = new Context(DisplayPlugin.class); will fail bc it's not a Service
 
-	serviceWithContext = ctx.service(DemoService.class); // everything filled out here
-	// asking cxt for service of a type. same instance of that service
-	// services are singletons in a particular context
-	serviceNoContext = new DemoService(); // vs without context
-    }
+		// creating one context
+		// signleton classes 1 instance of it
+		ctx.service(DemoService.class);
+		// plugins vs services
+		// ctx.getPluginIndex().get(Display.class);
+		// RichPlugin superclass of many plugins
 
-    @Test
-    public void getClassName() {
-	// class name is the same
-	assertEquals(serviceNoContext.getClass().toString(),
-		serviceWithContext.getClass().toString());
-    }
+		serviceWithContext = ctx.service(DemoService.class); // everything filled out here
+		// asking cxt for service of a type. same instance of that service
+		// services are singletons in a particular context
+		serviceNoContext = new DemoService(); // vs without context
+	}
 
-    @Test
-    public void testAppInfoNull() {
-	// Info is should be null because we didn't give a context
-	assertNull(serviceNoContext.getInfo());
-    }
+	@Test
+	public void getClassName() {
+		// class name is the same
+		assertEquals(serviceNoContext.getClass().toString(), serviceWithContext.getClass().toString());
+	}
 
-    @Test
-    public void testSameInfo() {
-	// should not be null because we did give it a context
-	assertNotNull(serviceWithContext.getInfo());
-    }
+	@Test
+	public void testAppInfoNull() {
+		// Info is should be null because we didn't give a context
+		assertNull(serviceNoContext.getInfo());
+	}
 
-    @Test
-    public void testToString() {
-	// same name and priority
-	assertEquals(serviceWithContext.toString(), serviceNoContext.toString());
-    }
+	@Test
+	public void testSameInfo() {
+		// should not be null because we did give it a context
+		assertNotNull(serviceWithContext.getInfo());
+	}
 
-    // TODO debug these below methods
+	@Test
+	public void testToString() {
+		// same name and priority
+		assertEquals(serviceWithContext.toString(), serviceNoContext.toString());
+	}
 
-    /*
-     * Make sure different instances created when calling method
-     */
-    @Test
-    public void testGDPNoContext() {
-	// throws NPE
-	assertNotEquals(serviceNoContext.getDisplayPlugins(), serviceNoContext.getDisplayPlugins());
-    }
+	// TODO debug these below methods
 
-    @Test
-    public void testGDPWithContext() {
-	// returns []
-	assertNotEquals(serviceWithContext.getDisplayPlugins(),
-		serviceWithContext.getDisplayPlugins());
-    }
+	/*
+	 * Make sure different instances created when calling method
+	 */
+	@Test
+	public void testGDPNoContext() {
+		// throws NPE
+		assertNotEquals(serviceNoContext.getDisplayPlugins(), serviceNoContext.getDisplayPlugins());
+	}
 
-    /**
-     * testGetDisplayPlugins()
-     *
-     * // null 
-     * 1. Understand why testGetDisplayPlugins threw NPE. It was correct to
-     * do that, understand why though.
-     * 
-     * testGetDisplayPlugins2() 
-     * 2. Check if there is anything in the
-     * serviceWithContext.getDisplayPlugins() -- debugger. 
-     * 2a If the list is empty
-     * change how the context is created by adding your DisplayPlugin.class 
-     * 2b. if
-     * the list is not empty or if changes are made and test still fails then Mark
-     * is wrong.
-     * 
-     * null when not getting from ctx. Context didnt add services and populate all
-     * info and dependencies needed. NPE without anything instantiated
-     * 
-     *
-     * //based on how Context is initialized it could change the getDisplayPlugins()
-     * contents
-     */
+	@Test
+	public void testGDPWithContext() {
+		// returns []
+		assertNotEquals(serviceWithContext.getDisplayPlugins(), serviceWithContext.getDisplayPlugins());
+	}
 
-    /*
-     * public static void main(String[] args) { DemoService d = new DemoService();
-     * System.out.println(d); }
-     */
+	/**
+	 * testGetDisplayPlugins()
+	 *
+	 * // null 1. Understand why testGetDisplayPlugins threw NPE. It was correct to
+	 * do that, understand why though.
+	 * 
+	 * testGetDisplayPlugins2() 2. Check if there is anything in the
+	 * serviceWithContext.getDisplayPlugins() -- debugger. 2a If the list is empty
+	 * change how the context is created by adding your DisplayPlugin.class 2b. if
+	 * the list is not empty or if changes are made and test still fails then Mark
+	 * is wrong.
+	 * 
+	 * null when not getting from ctx. Context didnt add services and populate all
+	 * info and dependencies needed. NPE without anything instantiated
+	 * 
+	 *
+	 * //based on how Context is initialized it could change the getDisplayPlugins()
+	 * contents
+	 */
 
-    // context is a collection of plugins
-    // service is a type of plugin
-    // module look into scijava common particular type of plugin with io.
-    // module has io
-    // service access to methods. singleton utility classes
+	/*
+	 * public static void main(String[] args) { DemoService d = new DemoService();
+	 * System.out.println(d); }
+	 */
+
+	// context is a collection of plugins
+	// service is a type of plugin
+	// module look into scijava common particular type of plugin with io.
+	// module has io
+	// service access to methods. singleton utility classes
 
 }
