@@ -31,43 +31,43 @@ import org.scijava.service.Service;
 //SciJavaPlugin -> RichPlugin --> Service --> AbstractService
 public class DemoService extends AbstractService {
 
-	// PluginService not DefaultPluginService, raise to interface not concrete class
-	// pluginService at runtime is a concrete class provided by the Context because
-	// of @parameter
+    // PluginService not DefaultPluginService, raise to interface not concrete class
+    // pluginService at runtime is a concrete class provided by the Context because
+    // of @parameter
 
-	// field with @parameter annotation is how to declare depenencies
-	@Parameter
-	private PluginService pluginService;
+    // field with @parameter annotation is how to declare depenencies
+    @Parameter
+    private PluginService pluginService;
 
-	// TODO think about this
-	// this.getContext().getPluginIndex().getPlugins(null);
+    // TODO think about this
+    // this.getContext().getPluginIndex().getPlugins(null);
 
-	// create a method that gets all plugins of a particular
-	// Class (look at type hierarchy of ScijavaPlugin)
-	// look at other Plugin. See how they declare dependancies on Service.
-	// They do that via PluginService
-	public List<Display> getDisplayPlugins() {
+    // create a method that gets all plugins of a particular
+    // Class (look at type hierarchy of ScijavaPlugin)
+    // look at other Plugin. See how they declare dependancies on Service.
+    // They do that via PluginService
+    public List<Display> getDisplayPlugins() {
 
-		// get PluginService from Context
+	// get PluginService from Context
 
-		// null without Context or NPE
-		// Context finds the Plugins so if no Context cant fine PluginService
+	// null without Context or NPE
+	// Context finds the Plugins so if no Context cant fine PluginService
 
-		// empty list with Context
+	// empty list with Context
 
-		// make instance of DisplayPlugin, using createInstanceOfType(),
-		// will connect it to a Context
-		// Add a dependancy on PluginService then use PluginSerivce to create
-		// the instance of the DisplayPlugin
+	// make instance of DisplayPlugin, using createInstanceOfType(),
+	// will connect it to a Context
+	// Add a dependency on PluginService then use PluginSerivce to create
+	// the instance of the DisplayPlugin
 
-		// So instead of createInstaneOfType(DemoDisplayPlugin) aka the concrete class
-		// use the Plugin type
-		List<Display> dp = pluginService.createInstancesOfType(Display.class);
+	// So instead of createInstaneOfType(DemoDisplayPlugin) aka the concrete class
+	// use the Plugin type
+	List<Display> dp = pluginService.createInstancesOfType(Display.class);
 
-		/// list should be coming back populated by plugin servies
-		// pluginService didnt find any plugins, why?
+	/// list should be coming back populated by plugin servies
+	// pluginService didn't find any plugins, why?
 
-		return dp;
-	}
+	return dp;
+    }
 
 }
